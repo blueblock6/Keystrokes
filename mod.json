@@ -1,0 +1,25 @@
+{
+	"geode": "2.0.0-beta.26",
+	"gd": {
+		"win": "2.204"
+	},
+	"version": "v1.0.0",
+	"id": "blueblock6.keystrokes",
+	"name": "Keystrokes",
+	"developer": "BlueBlock6",
+	"description": "Adds a keystrokes overlay in the corner of the screen while playing levels.",
+	"settings": {
+		"scale": {
+			"name": "Scale",
+			"description": "Scale of the widget",
+			"type": "float",
+			"default": 0.75,
+			"max": 1,
+			"min": 0.5,
+			"control": {
+				"slider": true,
+				"slider-step": 0.05
+			}
+		}
+	}
+}
