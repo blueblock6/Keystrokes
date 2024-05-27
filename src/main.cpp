@@ -5,21 +5,16 @@
 
 using namespace geode::prelude;
 
-CCNode* keystrokes;
+CCNode* keystrokes = nullptr;
 
 class $modify(PlayerObject) {
 	$override
 	void pushButton(PlayerButton p0) {
 		PlayerObject::pushButton(p0);	
 		
-		if(!keystrokes) return;
+		if(keystrokes == nullptr) return;
 		if(!m_isPlatformer && p0 != PlayerButton::Jump) return;
 		if(!PlayLayer::get()) return;
-
-		int expectedCount = 1;
-		if(m_isPlatformer) expectedCount *= 3;
-		if(PlayLayer::get()->m_level->m_twoPlayerMode) expectedCount *= 2;
-		if(keystrokes->getChildrenCount() < expectedCount) return;
 
 		std::string player = (PlayLayer::get()->m_level->m_twoPlayerMode && this == PlayLayer::get()->m_player2) ? "p2-" : "p1-";
 
@@ -40,14 +35,9 @@ class $modify(PlayerObject) {
 	void releaseButton(PlayerButton p0) {
 		PlayerObject::releaseButton(p0);
 
-		if(!keystrokes) return;
+		if(keystrokes == nullptr) return;
 		if(!m_isPlatformer && p0 != PlayerButton::Jump) return;
 		if(!PlayLayer::get()) return;
-
-		int expectedCount = 1;
-		if(m_isPlatformer) expectedCount *= 3;
-		if(PlayLayer::get()->m_level->m_twoPlayerMode) expectedCount *= 2;
-		if(keystrokes->getChildrenCount() < expectedCount) return;
 
 		std::string player = (PlayLayer::get()->m_level->m_twoPlayerMode && this == PlayLayer::get()->m_player2) ? "p2-" : "p1-";
 		switch(p0) {
@@ -141,5 +131,11 @@ class $modify(KeystrokesLayer, PlayLayer) {
 		this->addChild(keystrokes, 50);
 
 		return true;
+	}
+
+	$override
+	void onExit() {
+		keystrokes = nullptr;
+		PlayLayer::onExit();
 	}
 };
