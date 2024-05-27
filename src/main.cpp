@@ -134,8 +134,8 @@ class $modify(KeystrokesLayer, PlayLayer) {
 	}
 
 	$override
-	void onExit() {
+	void onQuit() {
 		keystrokes = nullptr;
-		PlayLayer::onExit();
+		PlayLayer::onQuit();
 	}
 };
