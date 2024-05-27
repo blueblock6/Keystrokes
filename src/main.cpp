@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/PlayLayer.hpp>
-#include <Geode/modify/UILayer.hpp>
+#include <Geode/modify/PauseLayer.hpp>
 
 using namespace geode::prelude;
 
@@ -137,5 +137,13 @@ class $modify(KeystrokesLayer, PlayLayer) {
 	void onQuit() {
 		keystrokes = nullptr;
 		PlayLayer::onQuit();
+	}
+};
+
+class $modify(PauseLayer) {
+	$override
+	void onEdit(CCObject* sender) {
+		keystrokes = nullptr;
+		PauseLayer::onEdit(sender);
 	}
 };
