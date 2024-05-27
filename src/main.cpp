@@ -16,6 +16,11 @@ class $modify(PlayerObject) {
 		if(!m_isPlatformer && p0 != PlayerButton::Jump) return;
 		if(!PlayLayer::get()) return;
 
+		int expectedCount = 1;
+		if(m_isPlatformer) expectedCount *= 3;
+		if(PlayLayer::get()->m_level->m_twoPlayerMode) expectedCount *= 2;
+		if(keystrokes->getChildrenCount() < expectedCount) return;
+
 		std::string player = (PlayLayer::get()->m_level->m_twoPlayerMode && this == PlayLayer::get()->m_player2) ? "p2-" : "p1-";
 
 		switch(p0) {
@@ -38,6 +43,11 @@ class $modify(PlayerObject) {
 		if(!keystrokes) return;
 		if(!m_isPlatformer && p0 != PlayerButton::Jump) return;
 		if(!PlayLayer::get()) return;
+
+		int expectedCount = 1;
+		if(m_isPlatformer) expectedCount *= 3;
+		if(PlayLayer::get()->m_level->m_twoPlayerMode) expectedCount *= 2;
+		if(keystrokes->getChildrenCount() < expectedCount) return;
 
 		std::string player = (PlayLayer::get()->m_level->m_twoPlayerMode && this == PlayLayer::get()->m_player2) ? "p2-" : "p1-";
 		switch(p0) {
