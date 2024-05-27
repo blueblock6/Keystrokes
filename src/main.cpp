@@ -12,6 +12,7 @@ class $modify(PlayerObject) {
 	void pushButton(PlayerButton p0) {
 		PlayerObject::pushButton(p0);	
 		
+		if(!keystrokes) return;
 		if(!m_isPlatformer && p0 != PlayerButton::Jump) return;
 		if(!PlayLayer::get()) return;
 
@@ -34,6 +35,7 @@ class $modify(PlayerObject) {
 	void releaseButton(PlayerButton p0) {
 		PlayerObject::releaseButton(p0);
 
+		if(!keystrokes) return;
 		if(!m_isPlatformer && p0 != PlayerButton::Jump) return;
 		if(!PlayLayer::get()) return;
 
